@@ -343,6 +343,8 @@ while gamework:
             player_y -= 10
         elif player_x >= 740 and player_x <= 745 and player_y >= 100 and player_y <= 205:
             player_x += 10
+        elif player_x >= 565 and player_x <= 730 and player_y >= 205 and player_y <= 211:
+            player_y += 10
     #3
     if lvl == 4:
         wind.blit(hmins, (0,0))
@@ -412,6 +414,8 @@ while gamework:
             player_y -= 10
         elif player_x >= 740 and player_x <= 745 and player_y >= 100 and player_y <= 205:
             player_x += 10
+        elif player_x >= 565 and player_x <= 730 and player_y >= 205 and player_y <= 211:
+            player_y += 10
     
     #дебаг
     if key[pygame.K_p]:
