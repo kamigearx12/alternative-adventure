@@ -1,8 +1,11 @@
 import pygame
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('ini.ini')
 
 gamework = True
 
-skin = 0
+skin = int(config['general']['skin'])
 
 lvl=1
 
@@ -15,41 +18,81 @@ bg = pygame.image.load('res/bg.png')
 bg2 = pygame.image.load('res/bg2.png')
 hmins = pygame.image.load('res/homeinside.png')
 hminsa = pygame.image.load('res/homeinsidea.png')
+
 #анімації
-
-walkdown = [
-    pygame.image.load('res/pl.png'),
-    pygame.image.load('res/pl1.png'),
-    pygame.image.load('res/pl.png'),
-    pygame.image.load('res/pl2.png')
-]
-
-
-
-walkup = [
-    pygame.image.load('res/up.png'),
-    pygame.image.load('res/up1.png'),
-    pygame.image.load('res/up.png'),
-    pygame.image.load('res/up2.png')
-]
+if skin == 0:
+    walkdown = [
+        pygame.image.load('res/pl.png'),
+        pygame.image.load('res/pl1.png'),
+        pygame.image.load('res/pl.png'),
+        pygame.image.load('res/pl2.png')
+    ]
 
 
 
-walkr = [
-    pygame.image.load('res/r.png'),
-    pygame.image.load('res/r1.png'),
-    pygame.image.load('res/r.png'),
-    pygame.image.load('res/r2.png')
-]
+    walkup = [
+        pygame.image.load('res/up.png'),
+        pygame.image.load('res/up1.png'),
+        pygame.image.load('res/up.png'),
+        pygame.image.load('res/up2.png')
+    ]
 
 
 
-walkl = [
-    pygame.image.load('res/l.png'),
-    pygame.image.load('res/l1.png'),
-    pygame.image.load('res/l.png'),
-    pygame.image.load('res/l2.png')
-]
+    walkr = [
+        pygame.image.load('res/r.png'),
+        pygame.image.load('res/r1.png'),
+        pygame.image.load('res/r.png'),
+        pygame.image.load('res/r2.png')
+    ]
+
+
+
+    walkl = [
+        pygame.image.load('res/l.png'),
+        pygame.image.load('res/l1.png'),
+        pygame.image.load('res/l.png'),
+        pygame.image.load('res/l2.png')
+    ]
+    
+    idle = pygame.image.load('res/pl.png')
+
+else:
+    walkdown = [
+        pygame.image.load(f'skin/{str(skin)}/pl.png'),
+        pygame.image.load(f'skin/{str(skin)}/pl1.png'),
+        pygame.image.load(f'skin/{str(skin)}/pl.png'),
+        pygame.image.load(f'skin/{str(skin)}/pl2.png')
+    ]
+
+
+
+    walkup = [
+        pygame.image.load(f'skin/{str(skin)}/up.png'),
+        pygame.image.load(f'skin/{str(skin)}/up1.png'),
+        pygame.image.load(f'skin/{str(skin)}/up.png'),
+        pygame.image.load(f'skin/{str(skin)}/up2.png')
+    ]
+
+
+
+    walkr = [
+        pygame.image.load(f'skin/{str(skin)}/r.png'),
+        pygame.image.load(f'skin/{str(skin)}/r1.png'),
+        pygame.image.load(f'skin/{str(skin)}/r.png'),
+        pygame.image.load(f'skin/{str(skin)}/r2.png')
+    ]
+
+
+
+    walkl = [
+        pygame.image.load(f'skin/{str(skin)}/l.png'),
+        pygame.image.load(f'skin/{str(skin)}/l1.png'),
+        pygame.image.load(f'skin/{str(skin)}/l.png'),
+        pygame.image.load(f'skin/{str(skin)}/l2.png')
+    ]
+
+    idle = pygame.image.load(f'skin/{str(skin)}/idle.png')
 
 kkts = [
     pygame.image.load('res/kkts.png'),
@@ -65,9 +108,10 @@ kktsa = [
     pygame.image.load('res/kktsa1.png'),
     pygame.image.load('res/kktsa.png')
 ]
+
 kkts_anim_cnt = 0
 
-idle = pygame.image.load('res/pl.png')
+
 
 gorob = pygame.image.load('res/gorob.png')
 
@@ -123,7 +167,7 @@ while gamework:
                 wind.blit(gorob, (player_x,player_y))
             else:
                 wind.blit(gorob, (player_x,player_y))
-        elif skin == 0:
+        else:
             if key[pygame.K_DOWN]:
                 wind.blit(walkdown[pl_anim_cnt], (player_x,player_y))
             elif key[pygame.K_UP]:
@@ -209,7 +253,7 @@ while gamework:
                 wind.blit(gorob, (player_x,player_y))
             else:
                 wind.blit(gorob, (player_x,player_y))
-        elif skin == 0:
+        else :
             if key[pygame.K_DOWN]:
                 wind.blit(walkdown[pl_anim_cnt], (player_x,player_y))
             elif key[pygame.K_UP]:
@@ -293,7 +337,7 @@ while gamework:
                 wind.blit(gorob, (player_x,player_y))
             else:
                 wind.blit(gorob, (player_x,player_y))
-        elif skin == 0:
+        else:
             if key[pygame.K_DOWN]:
                 wind.blit(walkdown[pl_anim_cnt], (player_x,player_y))
             elif key[pygame.K_UP]:
@@ -366,7 +410,7 @@ while gamework:
                 wind.blit(gorob, (player_x,player_y))
             else:
                 wind.blit(gorob, (player_x,player_y))
-        elif skin == 0:
+        else:
             if key[pygame.K_DOWN]:
                 wind.blit(walkdown[pl_anim_cnt], (player_x,player_y))
             elif key[pygame.K_UP]:
