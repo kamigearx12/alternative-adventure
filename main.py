@@ -22,6 +22,7 @@ bg = pygame.image.load('res/bg.png')
 bg2 = pygame.image.load('res/bg2.png')
 hmins = pygame.image.load('res/homeinside.png')
 hminsa = pygame.image.load('res/homeinsidea.png')
+darknes_room=pygame.image.load('res/darknes_room.png')
 
 #анімації
 if skin == 0:
@@ -483,6 +484,68 @@ while gamework:
             player_x += 10
         elif player_x >= 565 and player_x <= 730 and player_y >= 205 and player_y <= 211:
             player_y += 10
+        elif player_x >= 450 and player_x <= 500 and player_y >= -5 and player_y <= 10:
+            player_x = 45
+            player_y = 155
+            lvl = 5
+    
+    if lvl == 5:
+        wind.blit(darknes_room, (0,0))
+        key = pygame.key.get_pressed()
+        
+        if key[pygame.K_g] and skin == 0:
+            skin = 999
+        elif key[pygame.K_g] and skin == 999:
+            skin = 0
+        
+        if skin == 999:
+            if key[pygame.K_DOWN]:
+                wind.blit(gorob, (player_x,player_y))
+            elif key[pygame.K_UP]:
+                wind.blit(gorob, (player_x,player_y))
+            elif key[pygame.K_RIGHT]:
+                wind.blit(gorob, (player_x,player_y))
+            elif key[pygame.K_LEFT]:
+                wind.blit(gorob, (player_x,player_y))
+            else:
+                wind.blit(gorob, (player_x,player_y))
+        else:
+            if key[pygame.K_DOWN]:
+                wind.blit(walkdown[pl_anim_cnt], (player_x,player_y))
+            elif key[pygame.K_UP]:
+                wind.blit(walkup[pl_anim_cnt], (player_x,player_y))
+            elif key[pygame.K_RIGHT]:
+                wind.blit(walkr[pl_anim_cnt], (player_x,player_y))
+            elif key[pygame.K_LEFT]:
+                wind.blit(walkl[pl_anim_cnt], (player_x,player_y))
+            else:
+                wind.blit(idle, (player_x,player_y))
+        
+        #розміщення об'єктів
+        btnx = player_x + 35
+        btny = player_y + 20
+        wind.blit(btn, (btnx, btny))
+
+        if pl_anim_cnt == 3:
+            pl_anim_cnt = 0
+        else:
+            pl_anim_cnt += 1
+        #керування гравця
+        if key[pygame.K_DOWN] and player_y <= hght:
+            player_y += plspeed
+        elif key[pygame.K_UP] and player_y >= 0:
+            player_y -= plspeed
+        elif key[pygame.K_RIGHT] and player_x <= wght:
+            player_x += plspeed
+        elif key[pygame.K_LEFT] and player_x >= 0:
+            player_x -= plspeed
+
+        #колізія
+        elif player_x >= -5 and player_x <= 10 and player_y >= 140 and player_y <= 245:
+            player_x = 465
+            player_y = 35
+            lvl = 4
+        
     
     #дебаг
     if key[pygame.K_p]:
