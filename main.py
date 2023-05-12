@@ -1,5 +1,8 @@
 import pygame
+from pygame import sprite
+from pygame.draw import rect
 from configparser import ConfigParser
+
 config = ConfigParser()
 config.read('ini.ini')
 
@@ -13,6 +16,7 @@ timegm = pygame.time.Clock()
 #висота-довжина
 wght = 800
 hght = 400
+
 #БГ
 bg = pygame.image.load('res/bg.png')
 bg2 = pygame.image.load('res/bg2.png')
@@ -119,8 +123,8 @@ gorob = pygame.image.load('res/gorob.png')
 pygame.init()
 wind = pygame.display.set_mode((wght, hght))
 pygame.display.set_caption('shoska')
-icon = pygame.image.load('res/ico.png')
-pygame.display.set_icon(icon)
+favicon = pygame.image.load("res/ico.png")
+pygame.display.set_icon(favicon)
 #об'єкти
 home = pygame.image.load('res/home.png')
 home2 = pygame.image.load('res/home2.png')
@@ -130,6 +134,11 @@ kktsdialog2 = kktsdialogfnt.render('oh... you cant talk...', False, 'white')
 homeinf = kktsdialogfnt.render('this is not your home', False, 'red')
 kktsadialog = kktsdialogfnt.render('This is real bad place', False, 'white')
 btn = pygame.image.load('res/button.png')
+c=pygame.image.load('res/c.png')
+ca=pygame.image.load('res/ca.png')
+#cord list for c
+ccordx=[0,280,585,720,55,740]
+ccordy=[0,100,220,80,340,275]
 #настройки гравця
 pl_anim_cnt = 0
 plspeed = 5
@@ -187,6 +196,13 @@ while gamework:
         wind.blit(btn, (btnx, btny))
         wind.blit(kkts[kkts_anim_cnt], (535,220))
         wind.blit(home, (315,50))
+
+        for ccordsplace in range(6):
+            wind.blit(c, (ccordx[ccordsplace],ccordy[ccordsplace]))
+            if player_x >= ccordx[ccordsplace]-10 and player_x <= ccordx[ccordsplace]+10 and player_y >= ccordy[ccordsplace]+50-5 and player_y <= ccordy[ccordsplace]+50+5:
+                player_y += 10
+            elif player_x >= ccordx[ccordsplace]-10 and player_x <= ccordx[ccordsplace]+10 and player_y >= ccordy[ccordsplace]-15 and player_y <= ccordy[ccordsplace]-5:
+                player_y -= 10
         
 
         if pl_anim_cnt == 3:
@@ -272,6 +288,13 @@ while gamework:
 
         wind.blit(kktsa[kkts_anim_cnt], (535,220))
         wind.blit(home2, (315,50))
+
+        for ccordsplace in range(6):
+            wind.blit(ca, (ccordx[ccordsplace],ccordy[ccordsplace]))
+            if player_x >= ccordx[ccordsplace]-10 and player_x <= ccordx[ccordsplace]+10 and player_y >= ccordy[ccordsplace]+50-5 and player_y <= ccordy[ccordsplace]+50+5:
+                player_y += 10
+            elif player_x >= ccordx[ccordsplace]-10 and player_x <= ccordx[ccordsplace]+10 and player_y >= ccordy[ccordsplace]-15 and player_y <= ccordy[ccordsplace]-5:
+                player_y -= 10
         
 
         if pl_anim_cnt == 3:
@@ -490,6 +513,15 @@ while gamework:
             player_x = setup
         else:
             print('none')
+    if key[pygame.K_ESCAPE]:
+        exit()
+    if key[pygame.K_z] and plspeed==5:
+        plspeed = 25
+        print('noclip activated')
+    elif key[pygame.K_z] and plspeed > 5 or plspeed < 5:
+        plspeed = 5
+        print('noclip disactivated')
+        
     #шось
     pygame.display.update()
 
@@ -497,7 +529,6 @@ while gamework:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            gamework = False
-            pygame.quit()
+            exit()
 
     
