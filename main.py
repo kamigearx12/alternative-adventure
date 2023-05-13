@@ -62,6 +62,8 @@ if skin == 0:
     
     idle = pygame.image.load('res/pl.png')
 
+    btn = pygame.image.load('res/button.png')
+
 else:
     walkdown = [
         pygame.image.load(f'skin/{str(skin)}/pl.png'),
@@ -99,6 +101,11 @@ else:
 
     idle = pygame.image.load(f'skin/{str(skin)}/idle.png')
 
+    try:
+        btn = pygame.image.load(f'skin/{str(skin)}/button.png')
+    except:
+        btn = pygame.image.load('res/button.png')
+
 kkts = [
     pygame.image.load('res/kkts.png'),
     pygame.image.load('res/kkts1.png'),
@@ -134,7 +141,8 @@ kktsdialog = kktsdialogfnt.render('Hi Catavis! How are you today?', False, 'whit
 kktsdialog2 = kktsdialogfnt.render('oh... you cant talk!)', False, 'white')
 homeinf = kktsdialogfnt.render('this is not your home', False, 'red')
 kktsadialog = kktsdialogfnt.render('This is real bad place', False, 'white')
-btn = pygame.image.load('res/button.png')
+
+
 c=pygame.image.load('res/c.png')
 ca=pygame.image.load('res/ca.png')
 #cord list for c
@@ -189,7 +197,14 @@ while gamework:
             else:
                 wind.blit(idle, (player_x,player_y))
         
-
+        if key[pygame.K_s]:
+            wind.blit(walkdown[0], (player_x,player_y))
+        elif key[pygame.K_w]:
+            wind.blit(walkup[0], (player_x,player_y))
+        elif key[pygame.K_d]:
+            wind.blit(walkr[0], (player_x,player_y))
+        elif key[pygame.K_a]:
+            wind.blit(walkl[0], (player_x,player_y))
 
         #розміщення об'єктів
         btnx = player_x + 35
@@ -240,15 +255,18 @@ while gamework:
         if player_x >= -5 and player_x <= 415 and player_y >= 250 and player_y <= 265:
             player_y += 10
         if player_x >= 285 and player_x <= 395 and player_y >= 125 and player_y <= 150:
+            pygame.draw.rect(wind,(1,1,1),(290,40,200,45))
+            pygame.draw.rect(wind,(22, 24, 41),(290,40,200,45),5)
             wind.blit(homeinf, (315,50))
             player_y += 10
         if player_x >= 290 and player_x <= 390 and player_y >= 90 and player_y <= 105:
             player_y -= 10
     
-        if player_x >= 495 and player_x <= 575 and player_y >= 180 and player_y <= 220:
+        if player_x >= 495 and player_x <= 575 and player_y >= 180 and player_y <= 220 and key[pygame.K_e]:
+            pygame.draw.rect(wind, (1,1,1),(500,200,295,75))
+            pygame.draw.rect(wind, (22, 24, 41),(500,200,295,75),5)
             wind.blit(kktsdialog, (525,205))
-            wind.blit(kktsdialog2, (525,220))
-       
+            wind.blit(kktsdialog2, (525,220)) 
     #альтернатіва (2 левл)
     if lvl == 2:
         wind.blit(bg2, (0,0))
@@ -281,6 +299,15 @@ while gamework:
                 wind.blit(walkl[pl_anim_cnt], (player_x,player_y))
             else:
                 wind.blit(idle, (player_x,player_y))
+
+        if key[pygame.K_s]:
+            wind.blit(walkdown[0], (player_x,player_y))
+        elif key[pygame.K_w]:
+            wind.blit(walkup[0], (player_x,player_y))
+        elif key[pygame.K_d]:
+            wind.blit(walkr[0], (player_x,player_y))
+        elif key[pygame.K_a]:
+            wind.blit(walkl[0], (player_x,player_y))
         
         #розміщення об'єктів
         btnx = player_x + 35
@@ -331,14 +358,18 @@ while gamework:
             player_y -= 10
         if player_x >= -5 and player_x <= 415 and player_y >= 250 and player_y <= 265:
             player_y += 10
-        if player_x >= 285 and player_x <= 395 and player_y >= 125 and player_y <= 150:
+        if player_x >= 285 and player_x <= 395 and player_y >= 125 and player_y <= 150 and key[pygame.K_e]:
             player_x = 215
             player_y = 335
             lvl = 3
+        if player_x >= 285 and player_x <= 395 and player_y >= 115 and player_y <= 140:
+            player_y += 10
         if player_x >= 290 and player_x <= 390 and player_y >= 90 and player_y <= 105:
             player_y -= 10
         
-        if player_x >= 495 and player_x <= 575 and player_y >= 180 and player_y <= 220:
+        if player_x >= 495 and player_x <= 575 and player_y >= 180 and player_y <= 220 and key[pygame.K_e]:
+            pygame.draw.rect(wind, (1,1,1),(500,200,250,45))
+            pygame.draw.rect(wind, (22, 24, 41),(500,200,250,45),5)
             wind.blit(kktsadialog, (525,205))
     #3a
     if lvl == 3:
@@ -372,6 +403,15 @@ while gamework:
                 wind.blit(walkl[pl_anim_cnt], (player_x,player_y))
             else:
                 wind.blit(idle, (player_x,player_y))
+        
+        if key[pygame.K_s]:
+            wind.blit(walkdown[0], (player_x,player_y))
+        elif key[pygame.K_w]:
+            wind.blit(walkup[0], (player_x,player_y))
+        elif key[pygame.K_d]:
+            wind.blit(walkr[0], (player_x,player_y))
+        elif key[pygame.K_a]:
+            wind.blit(walkl[0], (player_x,player_y))
         
         #розміщення об'єктів
         btnx = player_x + 35
@@ -445,6 +485,15 @@ while gamework:
                 wind.blit(walkl[pl_anim_cnt], (player_x,player_y))
             else:
                 wind.blit(idle, (player_x,player_y))
+
+        if key[pygame.K_s]:
+            wind.blit(walkdown[0], (player_x,player_y))
+        elif key[pygame.K_w]:
+            wind.blit(walkup[0], (player_x,player_y))
+        elif key[pygame.K_d]:
+            wind.blit(walkr[0], (player_x,player_y))
+        elif key[pygame.K_a]:
+            wind.blit(walkl[0], (player_x,player_y))
         
         #розміщення об'єктів
         btnx = player_x + 35
@@ -520,6 +569,15 @@ while gamework:
                 wind.blit(walkl[pl_anim_cnt], (player_x,player_y))
             else:
                 wind.blit(idle, (player_x,player_y))
+
+        if key[pygame.K_s]:
+            wind.blit(walkdown[0], (player_x,player_y))
+        elif key[pygame.K_w]:
+            wind.blit(walkup[0], (player_x,player_y))
+        elif key[pygame.K_d]:
+            wind.blit(walkr[0], (player_x,player_y))
+        elif key[pygame.K_a]:
+            wind.blit(walkl[0], (player_x,player_y))
         
         #розміщення об'єктів
         btnx = player_x + 35
