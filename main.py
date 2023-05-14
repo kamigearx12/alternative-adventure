@@ -123,7 +123,7 @@ kktsa = [
 
 kkts_anim_cnt = 0
 
-
+dialoguse=False
 
 gorob = pygame.image.load('res/gorob.png')
 
@@ -138,7 +138,6 @@ home = pygame.image.load('res/home.png')
 home2 = pygame.image.load('res/home2.png')
 kktsdialogfnt = pygame.font.Font('res/DeliciousHandrawn-Regular.ttf', 24)
 kktsdialog = kktsdialogfnt.render('Hi Catavis! How are you today?', False, 'white')
-kktsdialog2 = kktsdialogfnt.render('oh... you cant talk!)', False, 'white')
 homeinf = kktsdialogfnt.render('this is not your home', False, 'red')
 kktsadialog = kktsdialogfnt.render('This is real bad place', False, 'white')
 
@@ -153,6 +152,11 @@ pl_anim_cnt = 0
 plspeed = 5
 player_x=335
 player_y=175
+#функції
+def dialog(text):
+    pygame.draw.rect(wind, (1,1,1),(-5,280,810,120))
+    pygame.draw.rect(wind, (22, 24, 41),(-5,280,810,120),5)
+    wind.blit(text, (100,300))
 #цикл
 while gamework:
     key = pygame.key.get_pressed()
@@ -261,12 +265,13 @@ while gamework:
             player_y += 10
         if player_x >= 290 and player_x <= 390 and player_y >= 90 and player_y <= 105:
             player_y -= 10
-    
-        if player_x >= 495 and player_x <= 575 and player_y >= 180 and player_y <= 220 and key[pygame.K_e]:
-            pygame.draw.rect(wind, (1,1,1),(500,200,295,75))
-            pygame.draw.rect(wind, (22, 24, 41),(500,200,295,75),5)
-            wind.blit(kktsdialog, (525,205))
-            wind.blit(kktsdialog2, (525,220)) 
+        #dialog
+        if player_x >= 495 and player_x <= 575 and player_y >= 180 and player_y <= 220 and key[pygame.K_e] and dialoguse == False:
+            dialoguse=1
+        if dialoguse == 1:
+            dialog(kktsdialog)
+        if key[pygame.K_n]:
+            dialoguse = False
     #альтернатіва (2 левл)
     if lvl == 2:
         wind.blit(bg2, (0,0))
@@ -358,7 +363,7 @@ while gamework:
             player_y -= 10
         if player_x >= -5 and player_x <= 415 and player_y >= 250 and player_y <= 265:
             player_y += 10
-        if player_x >= 285 and player_x <= 395 and player_y >= 125 and player_y <= 150 and key[pygame.K_e]:
+        if player_x >= 285 and player_x <= 395 and player_y >= 125 and player_y <= 150 and key[pygame.K_w]:
             player_x = 215
             player_y = 335
             lvl = 3
@@ -366,11 +371,13 @@ while gamework:
             player_y += 10
         if player_x >= 290 and player_x <= 390 and player_y >= 90 and player_y <= 105:
             player_y -= 10
-        
-        if player_x >= 495 and player_x <= 575 and player_y >= 180 and player_y <= 220 and key[pygame.K_e]:
-            pygame.draw.rect(wind, (1,1,1),(500,200,250,45))
-            pygame.draw.rect(wind, (22, 24, 41),(500,200,250,45),5)
-            wind.blit(kktsadialog, (525,205))
+        #dialog
+        if player_x >= 495 and player_x <= 575 and player_y >= 180 and player_y <= 220 and key[pygame.K_e] and dialoguse==0:
+            dialoguse=1
+        if dialoguse == 1:
+            dialog(kktsadialog)
+        if key[pygame.K_n]:
+            dialoguse = False
     #3a
     if lvl == 3:
         wind.blit(hminsa, (0,0))
@@ -533,7 +540,7 @@ while gamework:
             player_x += 10
         elif player_x >= 565 and player_x <= 730 and player_y >= 205 and player_y <= 211:
             player_y += 10
-        elif player_x >= 450 and player_x <= 500 and player_y >= -5 and player_y <= 10:
+        elif player_x >= 450 and player_x <= 500 and player_y >= -5 and player_y <= 10 and key[pygame.K_w]:
             player_x = 45
             player_y = 155
             lvl = 5
@@ -604,7 +611,6 @@ while gamework:
             player_y = 35
             lvl = 4
         
-    
     #дебаг
     if key[pygame.K_p]:
         print(f'x:{player_x}, y:{player_y}')
