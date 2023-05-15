@@ -2,6 +2,7 @@ import pygame
 from pygame import sprite
 from pygame.draw import rect
 from configparser import ConfigParser
+pygame.init()
 
 config = ConfigParser()
 config.read('ini.ini')
